@@ -1,0 +1,60 @@
+header{
+  padding: 1vh 0;
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.autocomplete{
+  width: 60vw;
+  margin-top: .5rem;
+}
+
+.logo{
+  margin: 0 2vw 0 0vw;
+  border-bottom: .2rem solid white;
+  transition: border .3s ease-in;
+}
+
+.logo:hover{
+  border-bottom: .2rem solid black;
+}
+
+.logo h2{
+  font-size: 1.1rem;
+  margin-bottom: -.6rem;
+  text-align: center;
+}
+
+.logo h1{
+  font-weight: bold;
+  font-size: 2.1rem;
+}
+
+nav{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1.1rem;
+  gap: .8rem;
+  margin: 0 1vw 0 2vw;
+  justify-items:center;
+  align-items: center;
+  font-variant: small-caps;
+}
+
+nav a:before{
+  content: '';
+  border-left: .6rem solid black;
+  margin-right: .5vw;
+  opacity: 0;
+  transition: .3s ease-in;
+}
+
+nav a:hover::before{
+  opacity: 1;
+}
+
+
+
