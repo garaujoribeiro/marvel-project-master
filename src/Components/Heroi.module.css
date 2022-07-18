@@ -1,0 +1,50 @@
+
+.bodyContainer{
+  display: grid;
+  grid-template-columns: 100vw;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+
+.name{
+  grid-column: 1/2;
+  grid-row: 1;
+}
+.descricao{
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1vh 0vw;
+}
+
+.titulo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name{
+  font-variant: small-caps;
+}
+
+.nameContainer{
+  margin: 0 1.2vw
+}
+
+.events{
+  margin: 3vh 1vw;
+  width: 80vw;
+  justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0 1vw;
+}
+
+.tituloSecao{
+  margin: 2vh 0;
+}
+
+.nulo{
+  margin: 10vh 0;
+}

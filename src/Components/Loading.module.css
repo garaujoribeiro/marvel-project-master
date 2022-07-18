@@ -1,0 +1,23 @@
+.imageContainer{
+  display: flex;
+  justify-content: center;
+  height: 70vh;
+}
+
+@keyframes animeLoading {
+  50%{
+    opacity: 1;
+  }
+
+  100%{
+    opacity: .25;
+  }
+}
+
+.loadingImage{
+  opacity: 0.25;
+  width: 25vw;
+  height: 25vh;
+  animation: animeLoading 1.5s ease-in-out .3s infinite;
+}
+

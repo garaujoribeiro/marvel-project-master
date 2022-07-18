@@ -2,7 +2,11 @@ import React from 'react';
 import styles from './Footer.module.css';
 
 function Footer() {
-  return <footer className={styles.footer}>Marvel Comics todos os direitos reservados</footer>;
+  return (
+    <footer className={styles.footer}>
+      Marvel Comics todos os direitos reservados
+    </footer>
+  );
 }
 
 export default Footer;
