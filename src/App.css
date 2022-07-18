@@ -3,11 +3,13 @@
 }
 
 body{
+  width: 100  vw;
   margin: 0px;
   color: #333;
   --type-first: Helvetica, Arial, sans-serif;
   --type-second: 'Spectral', Georgia;
   font-family: var(--type-first);
+  overflow-x: hidden;
 }
 
 h1,h2,h3,h4,p{
@@ -19,6 +21,7 @@ h1,h2,h3,h4,p{
 a{
   text-decoration: none;
   color:inherit;
+  display: block;
 }
 
 ul,li{
