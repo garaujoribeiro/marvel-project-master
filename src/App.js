@@ -9,6 +9,7 @@ import Heroi from './Heroi/Heroi';
 import DirecionarHome from './Components/Direcionar/DirecionarHome';
 import DirecionarHeroi from './Components/Direcionar/DirecionarHeroi';
 import ListaBusca from './Home/ListaBusca';
+import ListaSection from './Heroi/HeroiComponents/Section/ListaSection';
 function App() {
   const [favorito, setFavorito] = useState(null);
   const [buscarPersonagem, setBuscarPersonagem] = useState(null);
@@ -38,6 +39,15 @@ function App() {
           <Route
             path={'/heroi/:id'}
             element={<Heroi favorito={favorito} setFavorito={setFavorito} />}
+          />
+          <Route
+            path={'/heroi/:id/:secao/:pageURL'}
+            element={
+              <>
+                <Heroi favorito={favorito} setFavorito={setFavorito} />
+                <ListaSection />
+              </>
+            }
           />
         </Routes>
         <Footer />
