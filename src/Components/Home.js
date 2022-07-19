@@ -6,22 +6,26 @@ import {
   CardMedia,
   Pagination,
   Typography,
+  Stack,
 } from '@mui/material';
 import styles from './Home.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Loading from './Loading';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import { allHeroes } from './AllHeroes';
 function Home() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+  const { pageURL } = useParams();
 
-  const { data, isLoading } = useQuery(
+  if (page !== pageURL) setPage(pageURL);
+
+  const { data, isLoading, isFetching } = useQuery(
     ['herois', page],
     async () => {
       const response = await axios.get(
         `https://gateway.marvel.com:443/v1/public/characters?offset=${
-          20 * page
+          20 * (page - 1)
         }&apikey=175433ccb801e487f623da18c023d07e`,
       );
       return response.data;
@@ -32,7 +36,12 @@ function Home() {
     },
   );
 
-  if (isLoading) return <Loading />;
+  const handlePagination = (e, pageNumber) => {
+    setPage(pageNumber);
+    navigate(`/home/${pageNumber}`);
+  };
+
+  if (isLoading || isFetching) return <Loading />;
   if (!data) return null;
 
   return (
@@ -63,14 +72,15 @@ function Home() {
         </div>
       </section>
       <section className={styles.pagina}>
-        <Pagination
-          onChange={(e, pageNumber) => {
-            setPage(pageNumber);
-          }}
-          size="large"
-          count={Math.floor(allHeroes.length / 20)}
-        />
-        {/*20 é o numero de hérois por página*/}
+        <Stack direction="row" spacing={2}>
+          <Pagination
+            size="small"
+            page={Number(page)}
+            onChange={handlePagination}
+            count={Math.ceil(data.data.total / 20)}
+          />
+          {/*20 é o numero de hérois por página*/}
+        </Stack>
       </section>
     </>
   );

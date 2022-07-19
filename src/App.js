@@ -6,6 +6,7 @@ import Home from './Components/Home';
 import './App.css';
 import { CssBaseline } from '@mui/material';
 import Heroi from './Components/Heroi';
+import DirecionarHome from './Components/DirecionarHome';
 function App() {
   return (
     <main>
@@ -13,10 +14,10 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path={'/'} element={<Home />} />
+          <Route path={'/'} element={<DirecionarHome />} />
+          <Route path={'/home/:pageURL'} element={<Home />} />
           <Route path={'/heroi/:id'} element={<Heroi />} />
         </Routes>
-
         <Footer />
       </BrowserRouter>
     </main>

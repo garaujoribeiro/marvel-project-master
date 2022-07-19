@@ -48,3 +48,9 @@
 .nulo{
   margin: 10vh 0;
 }
+
+.favoritoContainer{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}

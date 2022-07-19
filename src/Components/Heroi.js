@@ -7,6 +7,7 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
+  Rating,
 } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
@@ -130,41 +131,57 @@ function Heroi() {
                 sx={{ width: '5rem', height: '5rem' }}
               />
             </article>
-            <div className={styles.popOver}>
-              <Button
-                aria-describedby={'heroi_descricao'}
-                variant="text"
-                onClick={({ currentTarget }) => {
-                  setPopText(description ? description : NULA('Herói'));
-                  setAnchorEl(currentTarget);
-                }}
-              >{`Sobre o herói`}</Button>
-              <Popover
-                transitionDuration={0.5}
-                sx={{ width: '70vw' }}
-                id="heroi_descricao"
-                open={
-                  anchorEl
-                    ? anchorEl.innerHTML.split('<')[0] === 'Sobre o herói'
-                    : false
-                }
-                anchorEl={anchorEl}
-                onClose={() => {
-                  setAnchorEl(null);
-                  setPopText(null);
-                }}
-              >
-                <Typography
-                  sx={{ padding: '.8rem' }}
-                  variant="body1"
-                  component="p"
+            <div>
+              <div className={styles.popOver}>
+                <Button
+                  aria-describedby={'heroi_descricao'}
+                  variant="text"
+                  onClick={({ currentTarget }) => {
+                    setPopText(description ? description : NULA('Herói'));
+                    setAnchorEl(currentTarget);
+                  }}
+                >{`Sobre o herói`}</Button>
+                <Popover
+                  transitionDuration={0.5}
+                  sx={{ width: '70vw' }}
+                  id="heroi_descricao"
+                  open={
+                    anchorEl
+                      ? anchorEl.innerHTML.split('<')[0] === 'Sobre o herói'
+                      : false
+                  }
+                  anchorEl={anchorEl}
+                  onClose={() => {
+                    setAnchorEl(null);
+                    setPopText(null);
+                  }}
                 >
-                  {popText}
+                  <Typography
+                    sx={{ padding: '.8rem' }}
+                    variant="body1"
+                    component="p"
+                  >
+                    {popText}
+                  </Typography>
+                  <Button href={urls[0].url} variant="text">
+                    Saiba mais
+                  </Button>
+                </Popover>
+              </div>
+              <div className={styles.favoritoContainer}>
+                {' '}
+                <Rating
+                  defaultValue={0}
+                  onChange={(e, value) =>
+                    console.log(value ? 'Ativou' : 'Desativou')
+                  }
+                  className={styles.rating}
+                  max={1}
+                />
+                <Typography variant="body2" component="span">
+                  Favoritar
                 </Typography>
-                <Button href={urls[0].url} variant="text">
-                  Saiba mais
-                </Button>
-              </Popover>
+              </div>
             </div>
           </div>
         </section>
