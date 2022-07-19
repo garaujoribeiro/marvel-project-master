@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Loading from './Loading';
+import Loading from '../../Assets/Loading';
 
 function DirecionarHome() {
   const navigate = useNavigate();

@@ -1,48 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
-  Pagination,
   Typography,
-  Stack,
 } from '@mui/material';
-import styles from './Home.module.css';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import Loading from './Loading';
+import styles from './ListaBusca.module.css';
+import { Link, useParams } from 'react-router-dom';
+import Loading from '../Assets/Loading';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-function Home() {
-  const [page, setPage] = useState(1);
-  const navigate = useNavigate();
-  const { pageURL } = useParams();
-
-  if (page !== pageURL) setPage(pageURL);
+function ListaBusca() {
+  const params = useParams();
 
   const { data, isLoading, isFetching } = useQuery(
-    ['herois', page],
+    [params.buscarPersonagem],
     async () => {
       const response = await axios.get(
-        `https://gateway.marvel.com:443/v1/public/characters?offset=${
-          20 * (page - 1)
-        }&apikey=175433ccb801e487f623da18c023d07e`,
+        `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${params.buscarPersonagem}&apikey=175433ccb801e487f623da18c023d07e`,
       );
       return response.data;
     },
     {
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: 'false',
       staleTime: 60 * 1000 * 60, // 1 hora
     },
   );
 
-  const handlePagination = (e, pageNumber) => {
-    setPage(pageNumber);
-    navigate(`/home/${pageNumber}`);
-  };
-
   if (isLoading || isFetching) return <Loading />;
-  if (!data) return null;
+  if (!data) return <>Olá mundo</>;
 
   return (
     <>
@@ -71,19 +58,8 @@ function Home() {
             })}
         </div>
       </section>
-      <section className={styles.pagina}>
-        <Stack direction="row" spacing={2}>
-          <Pagination
-            size="small"
-            page={Number(page)}
-            onChange={handlePagination}
-            count={Math.ceil(data.data.total / 20)}
-          />
-          {/*20 é o numero de hérois por página*/}
-        </Stack>
-      </section>
     </>
   );
 }
 
-export default Home;
+export default ListaBusca;

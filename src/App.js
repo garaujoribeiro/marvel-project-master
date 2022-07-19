@@ -1,22 +1,44 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Footer from './Components/Footer';
 import Header from './Components/Header';
-import Home from './Components/Home';
+import Home from './Home/Home';
 import './App.css';
 import { CssBaseline } from '@mui/material';
-import Heroi from './Components/Heroi';
-import DirecionarHome from './Components/DirecionarHome';
+import Heroi from './Heroi/Heroi';
+import DirecionarHome from './Components/Direcionar/DirecionarHome';
+import DirecionarHeroi from './Components/Direcionar/DirecionarHeroi';
+import ListaBusca from './Home/ListaBusca';
 function App() {
+  const [favorito, setFavorito] = useState(null);
+  const [buscarPersonagem, setBuscarPersonagem] = useState(null);
+
+  const handleLocalStorage = useCallback(() => {
+    favorito
+      ? window.localStorage.setItem('favorito', favorito)
+      : setFavorito(window.localStorage.getItem('favorito'));
+  }, [favorito]);
+
+  useEffect(() => handleLocalStorage(), [handleLocalStorage]);
+
   return (
     <main>
       <CssBaseline />
       <BrowserRouter>
-        <Header />
+        <Header
+          favorito={favorito}
+          setBuscarPersonagem={setBuscarPersonagem}
+          buscarPersonagem={buscarPersonagem}
+        />
         <Routes>
+          <Route path={'/lista/:buscarPersonagem'} element={<ListaBusca />} />
+          <Route path={'/buscar/:nomeHeroi'} element={<DirecionarHeroi />} />
           <Route path={'/'} element={<DirecionarHome />} />
           <Route path={'/home/:pageURL'} element={<Home />} />
-          <Route path={'/heroi/:id'} element={<Heroi />} />
+          <Route
+            path={'/heroi/:id'}
+            element={<Heroi favorito={favorito} setFavorito={setFavorito} />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

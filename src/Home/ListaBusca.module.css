@@ -1,0 +1,18 @@
+.cardContainer{
+  display: flex;
+  justify-content: center;
+  margin: 3vh 0;
+}
+
+.cardGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 3vh 3vw;
+}
+
+.pagina{
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
+

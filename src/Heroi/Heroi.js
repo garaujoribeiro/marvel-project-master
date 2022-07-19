@@ -14,9 +14,9 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import styles from './Heroi.module.css';
-import Loading from './Loading';
+import Loading from '../Assets/Loading';
 
-function Heroi() {
+function Heroi({ favorito, setFavorito }) {
   const [anchorEl, setAnchorEl] = useState(null); // Estado para gerenciar a posição do popOver da descrição
   const [popText, setPopText] = useState(null); // Estado para gerenciar o texto escrito dentro do meu popover.
 
@@ -167,20 +167,25 @@ function Heroi() {
                     Saiba mais
                   </Button>
                 </Popover>
-              </div>
-              <div className={styles.favoritoContainer}>
-                {' '}
-                <Rating
-                  defaultValue={0}
-                  onChange={(e, value) =>
-                    console.log(value ? 'Ativou' : 'Desativou')
-                  }
-                  className={styles.rating}
-                  max={1}
-                />
-                <Typography variant="body2" component="span">
-                  Favoritar
-                </Typography>
+                <div className={styles.favoritoContainer}>
+                  {' '}
+                  <Rating
+                    name="simple-controlled"
+                    size="large"
+                    value={favorito === params.id ? 1 : 0}
+                    onChange={(e, value) =>
+                      value
+                        ? setFavorito(params.id)
+                        : (setFavorito(null),
+                          window.localStorage.removeItem('favorito'))
+                    }
+                    className={styles.rating}
+                    max={1}
+                  />
+                  <Typography variant="h6" component="span">
+                    Favoritar
+                  </Typography>
+                </div>
               </div>
             </div>
           </div>
