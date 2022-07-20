@@ -5,10 +5,6 @@
 body{
   width: 100  vw;
   margin: 0px;
-  color: #333;
-  --type-first: Helvetica, Arial, sans-serif;
-  --type-second: 'Spectral', Georgia;
-  font-family: var(--type-first);
   overflow-x: hidden;
 }
 
@@ -24,25 +20,7 @@ a{
   display: block;
 }
 
-ul,li{
-  list-style: none;
-  padding: 0px;
-  margin: 0px;
-}
-
 img{
   display: block;
   max-width: 100%;
-}
-
-button, input{
-  display: block;
-  font-size: 1rem;
-  font-family: var(--type-first);
-}
-
-.container{
-  max-width: 50rem;
-  padding: 0 1rem;
-  margin: 0 auto;
 }

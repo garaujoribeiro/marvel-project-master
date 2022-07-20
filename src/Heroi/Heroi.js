@@ -1,29 +1,34 @@
-import {
-  Avatar,
-  Typography,
-  Button,
-  Popover,
-  Card,
-  CardActionArea,
-  CardMedia,
-  CardContent,
-  Rating,
-} from '@mui/material';
+import { Avatar, Typography, Button, Popover, Rating } from '@mui/material';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import styles from './Heroi.module.css';
 import Loading from '../Assets/Loading';
-
+import HeroiSection from './HeroiComponents/Section/HeroiSection';
 function Heroi({ favorito, setFavorito }) {
   const [anchorEl, setAnchorEl] = useState(null); // Estado para gerenciar a posição do popOver da descrição
   const [popText, setPopText] = useState(null); // Estado para gerenciar o texto escrito dentro do meu popover.
+  const [isOnlySection, setIsOnlySection] = useState(null); // Estado para gerenciar a seção do heroi
 
   const params = useParams();
 
-  const heroQuery = useQuery(
-    ['hero'],
+  const handleSection = useCallback(() => {
+    setIsOnlySection(Boolean(params.secao));
+  }, [params.secao, setIsOnlySection]);
+  useEffect(handleSection, [handleSection]);
+
+  const fetchOptions = ['events', 'comics', 'series'];
+
+  const NULA = (seção) =>
+    `${seção} sem descrição fornecida pela Marvel, mas você pode ficar por dentro das últimas atualizações da Marvel no botão abaixo que te leva para o Marvel Unlimited!`;
+
+  const {
+    data: dataHero,
+    isLoading,
+    error,
+  } = useQuery(
+    [params.id],
     async () => {
       const response = await axios.get(
         `https://gateway.marvel.com:443/v1/public/characters/${params.id}?apikey=175433ccb801e487f623da18c023d07e`,
@@ -35,80 +40,13 @@ function Heroi({ favorito, setFavorito }) {
     },
   );
 
-  const comicsQuery = useQuery(
-    ['comics'],
-    async () => {
-      const response = await axios.get(
-        `https://gateway.marvel.com:443/v1/public/characters/${params.id}/comics?orderBy=-onsaleDate&limit=5&apikey=175433ccb801e487f623da18c023d07e`,
-      );
-      return response.data;
-    },
-    {
-      refetchOnWindowFocus: false,
-    },
-  );
-
-  const eventQuery = useQuery(
-    ['events'],
-    async () => {
-      const response = await axios.get(
-        `https://gateway.marvel.com:443/v1/public/characters/${params.id}/events?apikey=175433ccb801e487f623da18c023d07e`,
-      );
-      return response.data;
-    },
-    {
-      refetchOnWindowFocus: false,
-    },
-  );
-
-  const seriesQuery = useQuery(
-    ['series'],
-    async () => {
-      const response = await axios.get(
-        `https://gateway.marvel.com:443/v1/public/characters/${params.id}/series?apikey=175433ccb801e487f623da18c023d07e`,
-      );
-      return response.data;
-    },
-    {
-      refetchOnWindowFocus: false,
-    },
-  );
-
-  const NULA = (seção) =>
-    `${seção} sem descrição fornecida pela Marvel, mas você pode ficar por dentro das últimas atualizações da Marvel no botão abaixo que te leva para o Marvel Unlimited!`;
-
-  const seçãoNULATOTAL =
-    'Opa, pelo visto este herói não participa de nada nesta seção, mas se quiser ter certeza visite o site da Marvel Unlimited pelo botão abaixo!';
-
-  const {
-    isLoading: isLoadingHero,
-    data: dataHero,
-    error: errorHero,
-  } = heroQuery;
-  const {
-    isLoading: isLoadingEvent,
-    data: dataEvent,
-    error: errorEvent,
-  } = eventQuery;
-  const {
-    isLoading: isLoadingComics,
-    data: dataComics,
-    error: errorComics,
-  } = comicsQuery;
-  const {
-    isLoading: isLoadingSeries,
-    data: dataSeries,
-    error: errorSeries,
-  } = seriesQuery;
-
-  if (isLoadingHero || isLoadingEvent || isLoadingComics || isLoadingSeries)
-    return <Loading />;
+  if (isLoading) return <Loading />;
+  if (!dataHero) return null;
   if (Number(dataHero.data.results[0].id) !== Number(params.id))
     return <Loading />;
-  if (!dataHero || !dataEvent || !dataComics || !dataSeries) return null;
-  if (errorHero || errorEvent || errorComics || errorSeries) return null;
+  if (error) return <h2>{error.message}</h2>;
 
-  const { name, description, urls } = dataHero.data.results[0];
+  const { name, description } = dataHero.data.results[0];
 
   return (
     <>
@@ -134,6 +72,7 @@ function Heroi({ favorito, setFavorito }) {
             <div>
               <div className={styles.popOver}>
                 <Button
+                  sx={{ color: 'error.dark' }}
                   aria-describedby={'heroi_descricao'}
                   variant="text"
                   onClick={({ currentTarget }) => {
@@ -163,9 +102,6 @@ function Heroi({ favorito, setFavorito }) {
                   >
                     {popText}
                   </Typography>
-                  <Button href={urls[0].url} variant="text">
-                    Saiba mais
-                  </Button>
                 </Popover>
                 <div className={styles.favoritoContainer}>
                   {' '}
@@ -191,258 +127,16 @@ function Heroi({ favorito, setFavorito }) {
           </div>
         </section>
         <section className={styles.containerCards}>
-          <Typography
-            variant="h2"
-            component="h3"
-            className={styles.tituloSecao}
-          >
-            Eventos
-          </Typography>
-          {dataEvent.data.count > 0 ? (
-            <section className={styles.events}>
-              {dataEvent.data.results.map((item, idx) => {
-                if (idx > 3) return null;
-                return (
-                  <Card key={item.id} sx={{ width: '20vw' }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        image={`${item.thumbnail.path}/portrait_incredible.${item.thumbnail.extension}`}
-                        alt={item.name}
-                      />
-                    </CardActionArea>
-                    <CardContent>
-                      <Typography variant="h6" component="h5">
-                        {item.title}
-                      </Typography>
-                    </CardContent>
-                    <div className={styles.popOver}>
-                      <Button
-                        aria-describedby={item.id}
-                        variant="text"
-                        onClick={({ currentTarget }) => {
-                          setAnchorEl(currentTarget);
-                          setPopText(
-                            item.description
-                              ? item.description
-                              : NULA('Evento'),
-                          );
-                        }}
-                      >{`Sobre o evento`}</Button>
-                      <Popover
-                        transitionDuration={0.3}
-                        anchorOrigin={{
-                          vertical: 'center',
-                          horizontal: 'center',
-                        }}
-                        transformOrigin={{
-                          vertical: 'center',
-                          horizontal: 'center',
-                        }}
-                        sx={{ width: '100vw' }}
-                        id={item.id}
-                        open={
-                          anchorEl
-                            ? anchorEl.innerHTML.split('<')[0] ===
-                              'Sobre o evento'
-                            : false
-                        }
-                        anchorEl={anchorEl}
-                        onClose={() => {
-                          setAnchorEl(null);
-                          setPopText(null);
-                        }}
-                      >
-                        <Typography
-                          sx={{ padding: '.8rem' }}
-                          variant="body1"
-                          component="p"
-                        >
-                          {popText}
-                        </Typography>
-                      </Popover>
-                    </div>
-                  </Card>
-                );
-              })}
-            </section>
-          ) : (
-            <section>
-              <Typography sx={{ margin: '5vh 0' }} variant="body1">
-                {seçãoNULATOTAL}
-              </Typography>
-            </section>
-          )}
-          <Typography
-            variant="h2"
-            component="h3"
-            className={styles.tituloSecao}
-          >
-            Revistas
-          </Typography>
-          {dataComics.data.count > 0 ? (
-            <section className={styles.events}>
-              {dataComics.data.results.map((item, idx) => {
-                if (idx > 3) return null;
-                return (
-                  <Card key={item.id} sx={{ width: '20vw' }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        image={`${item.thumbnail.path}/portrait_incredible.${item.thumbnail.extension}`}
-                        alt={item.name}
-                      />
-                    </CardActionArea>
-                    <CardContent>
-                      <Typography variant="h6" component="h5">
-                        {item.title}
-                      </Typography>
-                    </CardContent>
-                    <div className={styles.popOver}>
-                      <Button
-                        aria-describedby={item.id}
-                        variant="text"
-                        onClick={({ currentTarget }) => {
-                          setAnchorEl(currentTarget);
-                          setPopText(
-                            item.description
-                              ? item.description
-                              : NULA('Revista'),
-                          );
-                        }}
-                      >{`Sobre a revista`}</Button>
-                      <Popover
-                        transitionDuration={0.3}
-                        anchorOrigin={{
-                          vertical: 'center',
-                          horizontal: 'center',
-                        }}
-                        transformOrigin={{
-                          vertical: 'center',
-                          horizontal: 'center',
-                        }}
-                        sx={{ width: '100vw' }}
-                        id={item.id}
-                        open={
-                          anchorEl
-                            ? anchorEl.innerHTML.split('<')[0] ===
-                              'Sobre a revista'
-                            : false
-                        }
-                        anchorEl={anchorEl}
-                        onClose={() => {
-                          setAnchorEl(null);
-                          setPopText(null);
-                        }}
-                      >
-                        <Typography
-                          sx={{ padding: '.8rem' }}
-                          variant="body1"
-                          component="p"
-                        >
-                          {popText}
-                        </Typography>
-                      </Popover>
-                    </div>
-                  </Card>
-                );
-              })}
-            </section>
-          ) : (
-            <section>
-              <Typography sx={{ margin: '5vh 0' }} variant="body1">
-                {seçãoNULATOTAL}
-              </Typography>
-            </section>
-          )}
-          <Typography
-            variant="h2"
-            component="h3"
-            className={styles.tituloSecao}
-          >
-            Series
-          </Typography>
-          {dataSeries.data.count > 0 ? (
-            <section className={styles.events}>
-              {dataSeries.data.results.map((item, idx) => {
-                if (idx > 3) return null;
-                return (
-                  <Card key={item.id} sx={{ width: '20vw' }}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        image={`${item.thumbnail.path}/portrait_incredible.${item.thumbnail.extension}`}
-                        alt={item.name}
-                      />
-                    </CardActionArea>
-                    <CardContent>
-                      <Typography variant="h6" component="h5">
-                        {item.title}
-                      </Typography>
-                    </CardContent>
-                    <div className={styles.popOver}>
-                      <Button
-                        aria-describedby={item.id}
-                        variant="text"
-                        onClick={({ currentTarget }) => {
-                          setAnchorEl(currentTarget);
-                          setPopText(
-                            item.description ? item.description : NULA('Serie'),
-                          );
-                        }}
-                      >{`Sobre a serie`}</Button>
-                      <Popover
-                        transitionDuration={0.3}
-                        anchorOrigin={{
-                          vertical: 'center',
-                          horizontal: 'center',
-                        }}
-                        transformOrigin={{
-                          vertical: 'center',
-                          horizontal: 'center',
-                        }}
-                        sx={{ width: '100vw' }}
-                        id={item.id}
-                        open={
-                          anchorEl
-                            ? anchorEl.innerHTML.split('<')[0] ===
-                              'Sobre a serie'
-                            : false
-                        }
-                        anchorEl={anchorEl}
-                        onClose={() => {
-                          setAnchorEl(null);
-                          setPopText(null);
-                        }}
-                      >
-                        <Typography
-                          sx={{ padding: '.8rem' }}
-                          variant="body1"
-                          component="p"
-                        >
-                          {popText}
-                        </Typography>
-                      </Popover>
-                    </div>
-                  </Card>
-                );
-              })}
-            </section>
-          ) : (
-            <section>
-              <Typography sx={{ margin: '5vh 0' }} variant="body1">
-                {seçãoNULATOTAL}
-              </Typography>
-            </section>
-          )}
-          <Button
-            href={
-              'http://marvel.com/comics/collection/73526/guardians_of_the_galaxy_vol_2_faithless_trade_paperback?utm_campaign=apiRef&utm_source=175433ccb801e487f623da18c023d07e'
-            }
-            variant="outlined"
-          >
-            Mais revistas na Marvel Unlimited
-          </Button>
+          {!isOnlySection &&
+            fetchOptions.map((item) => (
+              <HeroiSection
+                anchorEl={anchorEl}
+                setAnchorEl={setAnchorEl}
+                popText={popText}
+                setPopText={setPopText}
+                secao={item}
+              />
+            ))}
         </section>
       </section>
     </>

@@ -38,7 +38,7 @@ function ListaBusca() {
           {data &&
             data.data.results.map((item, idx) => {
               return (
-                <Card sx={{ width: '17vw' }} key={item.id + idx}>
+                <Card sx={{ width: '20vw' }} key={item.id + idx}>
                   <CardActionArea>
                     <Link to={`/heroi/${item.id}`}>
                       <CardMedia
@@ -47,7 +47,11 @@ function ListaBusca() {
                         alt={item.name}
                       />
                       <CardContent>
-                        <Typography variant="h6" component="span">
+                        <Typography
+                          sx={{ textAlign: 'center' }}
+                          variant="body1"
+                          component="span"
+                        >
                           {item.name}
                         </Typography>
                       </CardContent>

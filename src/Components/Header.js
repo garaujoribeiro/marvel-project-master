@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { allHeroes } from '../Assets/AllHeroes';
+import Logo from '../Assets/logo.svg';
 function Header({ favorito }) {
   const [buscarPersonagem, setBuscarPersonagem] = useState(null);
   const navigate = useNavigate();
@@ -14,11 +15,14 @@ function Header({ favorito }) {
     document.getElementById('headerAutocomplete').blur();
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   return (
     <header className={styles.header}>
       <Link to={'/'} className={styles.logo}>
-        <h2>bH4money,</h2>
-        <h1>Heroes</h1>
+        <img src={Logo} alt="Logo" />
       </Link>
       <form onSubmit={buscar}>
         <Autocomplete
@@ -32,7 +36,6 @@ function Header({ favorito }) {
           }}
           className={styles.autocomplete}
           options={allHeroes}
-          sx={{ color: 'primary.main' }}
           renderInput={(params) => (
             <TextField
               variant="outlined"
@@ -44,7 +47,13 @@ function Header({ favorito }) {
         />
       </form>
       <nav className={styles.nav}>
-        <Link to={'/'}>Ínicio Rápido</Link>
+        <Link
+          to={`/buscar/${
+            allHeroes[Math.floor(Math.random() * allHeroes.length)] // busca um heroi aleatorio
+          }`}
+        >
+          Ínicio Rápido
+        </Link>
         <Link to={favorito ? `/heroi/${favorito}` : '/home/1'}>
           Herói Favorito
         </Link>

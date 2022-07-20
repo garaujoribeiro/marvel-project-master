@@ -1,4 +1,5 @@
 .imageContainer{
+  background-color: #eee;
   display: flex;
   justify-content: center;
   height: 70vh;

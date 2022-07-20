@@ -1,5 +1,7 @@
 
 .bodyContainer{
+  padding-bottom: 2vh;
+  background-color: #eee;
   display: grid;
   grid-template-columns: 100vw;
   justify-items: center;
@@ -7,57 +9,37 @@
   text-align: center;
 }
 
-.name{
-  grid-column: 1/2;
-  grid-row: 1;
-}
-.descricao{
-  grid-row: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1vh 0vw;
-}
-
 .titulo{
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-.name{
-  font-variant: small-caps;
-}
 
 .nameContainer{
-  margin: 0 1.2vw
-}
-
-.events{
-  margin: 3vh 1vw;
-  width: 80vw;
-  justify-items: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 0 1vw;
+  margin: 4vh 4vw;
 }
 
 .tituloSecao{
-  margin: 2vh 0;
-}
-
-.nulo{
-  margin: 10vh 0;
+  margin: 4vh 0;
 }
 
 .favoritoContainer{
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: end;
-  gap: 0 1vw;
+  gap: 0 .3vw;
 }
 
 .popOver{
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.section{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  background-color: #111;
+  padding-bottom: 1.5vh;
 }

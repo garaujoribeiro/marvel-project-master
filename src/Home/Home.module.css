@@ -1,7 +1,11 @@
+.Home{
+  padding: 3vh 0 0 0;
+  background-color: #eee;
+}
+
 .cardContainer{
   display: flex;
   justify-content: center;
-  margin: 3vh 0;
 }
 
 .cardGrid{
@@ -11,6 +15,9 @@
 }
 
 .pagina{
+  margin-top: 2vh;
+  background-color: #111;
+  padding: 1.5vh 0;
   display: flex;
   width: 100vw;
   justify-content: center;
