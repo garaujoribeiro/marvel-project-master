@@ -46,41 +46,48 @@ function Home() {
 
   return (
     <>
-      <section className={styles.cardContainer}>
-        <div className={styles.cardGrid}>
-          {data &&
-            data.data.results.map((item, idx) => {
-              return (
-                <Card sx={{ width: '17vw' }} key={item.id + idx}>
-                  <CardActionArea>
-                    <Link to={`/heroi/${item.id}`}>
-                      <CardMedia
-                        component="img"
-                        image={`${item.thumbnail.path}/portrait_incredible.${item.thumbnail.extension}`}
-                        alt={item.name}
-                      />
-                      <CardContent>
-                        <Typography variant="h6" component="span">
-                          {item.name}
-                        </Typography>
-                      </CardContent>
-                    </Link>
-                  </CardActionArea>
-                </Card>
-              );
-            })}
-        </div>
-      </section>
-      <section className={styles.pagina}>
-        <Stack direction="row" spacing={2}>
-          <Pagination
-            size="small"
-            page={Number(page)}
-            onChange={handlePagination}
-            count={Math.ceil(data.data.total / 20)}
-          />
-          {/*20 é o numero de hérois por página*/}
-        </Stack>
+      <section className={styles.Home}>
+        {' '}
+        <section className={styles.cardContainer}>
+          <div className={styles.cardGrid}>
+            {data &&
+              data.data.results.map((item, idx) => {
+                return (
+                  <Card sx={{ width: '20vw' }} key={item.id + idx}>
+                    <CardActionArea>
+                      <Link to={`/heroi/${item.id}`}>
+                        <CardMedia
+                          component="img"
+                          image={`${item.thumbnail.path}/portrait_incredible.${item.thumbnail.extension}`}
+                          alt={item.name}
+                        />
+                        <CardContent>
+                          <Typography
+                            sx={{ textAlign: 'center' }}
+                            variant="body1"
+                            component="h2"
+                          >
+                            {item.name}
+                          </Typography>
+                        </CardContent>
+                      </Link>
+                    </CardActionArea>
+                  </Card>
+                );
+              })}
+          </div>
+        </section>
+        <section className={styles.pagina}>
+          <Stack direction="row" spacing={2}>
+            <Pagination
+              size="small"
+              page={Number(page)}
+              onChange={handlePagination}
+              count={Math.ceil(data.data.total / 20)}
+            />
+            {/*20 é o numero de hérois por página*/}
+          </Stack>
+        </section>
       </section>
     </>
   );
