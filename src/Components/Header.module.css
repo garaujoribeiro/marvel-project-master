@@ -1,10 +1,13 @@
-header{
-  padding: 1vh 0;
+.header{
+  padding: 3vh 0;
   display: flex;
   width: 100vw;
   align-items: center;
   justify-content: center;
-  color: black;
+  color: #ddd;
+  background-color: #222;
+  box-shadow: 1px 1px 3px #111);
+
 }
 
 .autocomplete{
@@ -13,13 +16,8 @@ header{
 }
 
 .logo{
-  margin: 0 2vw 0 0vw;
-  border-bottom: .2rem solid white;
+  width: 10vw;
   transition: border .3s ease-in;
-}
-
-.logo:hover{
-  border-bottom: .2rem solid black;
 }
 
 .logo h2{
@@ -33,7 +31,7 @@ header{
   font-size: 2.1rem;
 }
 
-nav{
+.nav{
   display: grid;
   grid-template-columns: 1fr 1fr;
   font-size: 1.1rem;
@@ -44,16 +42,13 @@ nav{
   font-variant: small-caps;
 }
 
-nav a:before{
-  content: '';
-  border-left: .6rem solid black;
-  margin-right: .5vw;
-  opacity: 0;
-  transition: .3s ease-in;
+.nav a{
+  border-bottom: .3rem solid #222);
+  transition: border .3s ease-in;
 }
 
-nav a:hover::before{
-  opacity: 1;
+.nav a:hover{
+border-bottom: .3rem solid #eee;;
 }
 
 

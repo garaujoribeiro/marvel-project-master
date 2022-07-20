@@ -1,0 +1,45 @@
+
+.bodyContainer{
+  padding-bottom: 2vh;
+  background-color: #eee;
+  display: grid;
+  grid-template-columns: 100vw;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+
+.titulo{
+  display: flex;
+  align-items: center;
+}
+
+
+.nameContainer{
+  margin: 4vh 4vw;
+}
+
+.tituloSecao{
+  margin: 4vh 0;
+}
+
+.favoritoContainer{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: end;
+  gap: 0 .3vw;
+}
+
+.popOver{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.section{
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  background-color: #111;
+  padding-bottom: 1.5vh;
+}

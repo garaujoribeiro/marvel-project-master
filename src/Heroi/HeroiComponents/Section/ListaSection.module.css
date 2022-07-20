@@ -1,0 +1,99 @@
+.secaoContainer{
+  background-color: #eee;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.cardContainer{
+  display: flex;
+  justify-content: center;
+  margin: 3vh 0;
+}
+
+.cardGrid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 3vh 3vw;
+}
+
+.pagina{
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
+
+
+.bodyContainer{
+  display: grid;
+  grid-template-columns: 100vw;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+
+.name{
+  grid-column: 1/2;
+  grid-row: 1;
+}
+.descricao{
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1vh 0vw;
+}
+
+.titulo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name{
+  font-variant: small-caps;
+}
+
+.nameContainer{
+  margin: 0 1.2vw
+}
+
+.section{
+  margin: 3vh 1vw;
+  width: 80vw;
+  justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 3vh 1vw;
+}
+
+.tituloSecao{
+  margin: 2vh 0;
+}
+
+.nulo{
+  margin: 10vh 0;
+}
+
+.favoritoContainer{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: end;
+  gap: 0 1vw;
+}
+
+.popOver{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.pagina{
+  margin-top: 2vh;
+  background-color: #111;
+  padding: 1.5vh 0;
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
+
