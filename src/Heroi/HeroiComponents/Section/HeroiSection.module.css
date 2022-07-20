@@ -1,0 +1,31 @@
+.secaoContainer{
+  padding-top: 5vh;
+  background-color: #eee;
+}
+
+.section{
+  padding: 2vh 0;
+  width: 80vw;
+  justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0 1vw;
+}
+
+
+.nulo{
+  margin: 10vh 0;
+}
+
+.favoritoContainer{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: end;
+  gap: 0 1vw;
+}
+
+.popOver{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
