@@ -28,4 +28,7 @@ Algumas funcionalidades que tiveram de ser retiradas devido a problemas da API (
 
 - Botão que redireciona os herois a sua página própria da Marvel.
 - Botão que redireciona o conteúdo para sua página própria da Marvel.
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2600a39f9eceddcb18a7bc4b4c69dfeb938a576
