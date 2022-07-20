@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../../Assets/Loading';
@@ -8,7 +7,7 @@ import { useQuery } from 'react-query';
 function DirecionarHeroi() {
   const { nomeHeroi } = useParams();
 
-  const { data, isLoading, isFetching, error } = useQuery(
+  const { data } = useQuery(
     [nomeHeroi],
     async () => {
       const response = await axios.get(
@@ -26,17 +25,11 @@ function DirecionarHeroi() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (data) navigate(`/heroi/${data.data.results[0].id}`);
+    if (data)
+      navigate(`/marvel-project-master/heroi/${data.data.results[0].id}`);
   }, [navigate, data]);
 
-  if (!data) return null;
-  if (isLoading || isFetching) return <Loading />;
-  if (error)
-    return (
-      <Typography variant="h3" component={'p'}>
-        {error.message}
-      </Typography>
-    );
+  return <Loading />;
 }
 
 export default DirecionarHeroi;

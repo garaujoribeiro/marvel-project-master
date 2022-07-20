@@ -6,7 +6,7 @@ function DirecionarHome() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate('/home/1');
+    navigate('/marvel-project-master/home/1');
   }, [navigate]);
 
   return <Loading />;

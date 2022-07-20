@@ -40,7 +40,7 @@ function ListaBusca() {
               return (
                 <Card sx={{ width: '20vw' }} key={item.id + idx}>
                   <CardActionArea>
-                    <Link to={`/heroi/${item.id}`}>
+                    <Link to={`/marvel-project-master/heroi/${item.id}`}>
                       <CardMedia
                         component="img"
                         image={`${item.thumbnail.path}/portrait_incredible.${item.thumbnail.extension}`}

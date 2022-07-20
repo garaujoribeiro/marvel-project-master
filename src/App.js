@@ -35,19 +35,28 @@ function App() {
             buscarPersonagem={buscarPersonagem}
           />
           <Routes>
-            <Route path={'/lista/:buscarPersonagem'} element={<ListaBusca />} />
-            <Route path={'/buscar/:nomeHeroi'} element={<DirecionarHeroi />} />
+            <Route
+              path={'/marvel-project-master/lista/:buscarPersonagem'}
+              element={<ListaBusca />}
+            />
+            <Route
+              path={'/marvel-project-master/buscar/:nomeHeroi'}
+              element={<DirecionarHeroi />}
+            />
             <Route
               path={'/marvel-project-master'}
               element={<DirecionarHome />}
             />
-            <Route path={'/home/:pageURL'} element={<Home />} />
             <Route
-              path={'/heroi/:id'}
+              path={'/marvel-project-master/home/:pageURL'}
+              element={<Home />}
+            />
+            <Route
+              path={'/marvel-project-master/heroi/:id'}
               element={<Heroi favorito={favorito} setFavorito={setFavorito} />}
             />
             <Route
-              path={'/heroi/:id/:secao/:pageURL'}
+              path={'/marvel-project-master/heroi/:id/:secao/:pageURL'}
               element={
                 <>
                   <Heroi favorito={favorito} setFavorito={setFavorito} />

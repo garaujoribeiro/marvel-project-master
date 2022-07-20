@@ -50,7 +50,7 @@ function ListaSection() {
 
   const handlePagination = (e, pageNumber) => {
     setPage(pageNumber);
-    navigate(`/heroi/${id}/${secao}/${pageNumber}`);
+    navigate(`/marvel-project-master/heroi/${id}/${secao}/${pageNumber}`);
   };
 
   if (isLoading || isFetching) return <Loading />;

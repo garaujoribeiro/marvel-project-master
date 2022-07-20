@@ -173,7 +173,7 @@ function HeroiSection({
           <Button
             sx={{ color: 'error.dark' }}
             onClick={() => {
-              navigate(`/heroi/${params.id}/${secao}/1`);
+              navigate(`/marvel-project-master/heroi/${params.id}/${secao}/1`);
             }}
             variant="text"
           >{`Ver mais ${

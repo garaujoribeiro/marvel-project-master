@@ -10,8 +10,9 @@ function Header({ favorito }) {
   const navigate = useNavigate();
 
   const buscar = (event) => {
+    if (buscarPersonagem === null) return null;
     event.preventDefault();
-    navigate(`/lista/${buscarPersonagem}`);
+    navigate(`/marvel-project-master/lista/${buscarPersonagem}`);
     document.getElementById('headerAutocomplete').blur();
   };
 
@@ -21,18 +22,20 @@ function Header({ favorito }) {
 
   return (
     <header className={styles.header}>
-      <Link to={'/'} className={styles.logo}>
+      <Link to={'/marvel-project-master'} className={styles.logo}>
         <img src={Logo} alt="Logo" />
       </Link>
       <form onSubmit={buscar}>
         <Autocomplete
+          clearOnEscape={true}
           id="headerAutocomplete"
           clearOnBlur={true}
           onInputChange={(e, value) => {
             setBuscarPersonagem(value);
           }}
           onChange={(e, value) => {
-            navigate(`/buscar/${value}`);
+            if (!value) return;
+            navigate(`/marvel-project-master/buscar/${value}`);
           }}
           className={styles.autocomplete}
           options={allHeroes}
@@ -48,13 +51,19 @@ function Header({ favorito }) {
       </form>
       <nav className={styles.nav}>
         <Link
-          to={`/buscar/${
+          to={`/marvel-project-master/buscar/${
             allHeroes[Math.floor(Math.random() * allHeroes.length)] // busca um heroi aleatorio
           }`}
         >
           Ínicio Rápido
         </Link>
-        <Link to={favorito ? `/heroi/${favorito}` : '/home/1'}>
+        <Link
+          to={
+            favorito
+              ? `/marvel-project-master/heroi/${favorito}`
+              : '/marvel-project-master/home/1'
+          }
+        >
           Herói Favorito
         </Link>
       </nav>

@@ -2,6 +2,8 @@
   display: flex;
   justify-content: center;
   margin: 3vh 0;
+  background-color: #eee;
+  padding: 3vh 0;
 }
 
 .cardGrid{
