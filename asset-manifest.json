@@ -1,13 +1,15 @@
 {
   "files": {
-    "main.css": "/marvel-project-master/static/css/main.f8698900.css",
-    "main.js": "/marvel-project-master/static/js/main.5a2c57a3.js",
+    "main.css": "/marvel-project-master/static/css/main.9e817d57.css",
+    "main.js": "/marvel-project-master/static/js/main.458d77b7.js",
     "index.html": "/marvel-project-master/index.html",
-    "main.f8698900.css.map": "/marvel-project-master/static/css/main.f8698900.css.map",
-    "main.5a2c57a3.js.map": "/marvel-project-master/static/js/main.5a2c57a3.js.map"
+    "static/media/logo.svg": "/marvel-project-master/static/media/logo.bcaec0470d5a7a6a04fe70e694d46725.svg",
+    "static/media/loading.svg": "/marvel-project-master/static/media/loading.0365a348e825f4dd5812be05b361a72a.svg",
+    "main.9e817d57.css.map": "/marvel-project-master/static/css/main.9e817d57.css.map",
+    "main.458d77b7.js.map": "/marvel-project-master/static/js/main.458d77b7.js.map"
   },
   "entrypoints": [
-    "static/css/main.f8698900.css",
-    "static/js/main.5a2c57a3.js"
+    "static/css/main.9e817d57.css",
+    "static/js/main.458d77b7.js"
   ]
 }
