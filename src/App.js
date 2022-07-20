@@ -37,7 +37,7 @@ function App() {
           <Routes>
             <Route path={'/lista/:buscarPersonagem'} element={<ListaBusca />} />
             <Route path={'/buscar/:nomeHeroi'} element={<DirecionarHeroi />} />
-            <Route path={'/'} element={<DirecionarHome />} />
+            <Route path={'/marvel-project-master'} element={<DirecionarHome />} />
             <Route path={'/home/:pageURL'} element={<Home />} />
             <Route
               path={'/heroi/:id'}
